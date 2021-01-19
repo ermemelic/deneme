@@ -1,0 +1,106 @@
+\documentclass[onecolumn]{article}
+%\usepackage{url}
+%\usepackage{algorithmic}
+\usepackage[a4paper]{geometry}
+\usepackage{datetime}
+\usepackage[margin=2em, font=small,labelfont=it]{caption}
+\usepackage{graphicx}
+\usepackage{mathpazo} % use palatino
+\usepackage[scaled]{helvet} % helvetica
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{subfigure}
+% Letterspacing macros
+\newcommand{\spacecaps}[1]{\textls[200]{\MakeUppercase{#1}}}
+\newcommand{\spacesc}[1]{\textls[50]{\textsc{\MakeLowercase{#1}}}}
+
+\title{\spacecaps{Assignment Report 1:
+}\\ \normalsize \spacesc{CENG 3521 , DATA MINING} }
+
+\author{Dilan Bozkurt\\dilanbozkurt@mu.edu.tr}
+%\date{\today\\\currenttime}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\section{Introduction}
+Data mining is a field that interests in finding patterns in big data.To find patterns,there are
+some practices such as machine learning, statics and data sets management systems.
+
+This homework's aim to taught lot of things.Firstly, preprocessing approaches which are applied on the datasets for the sake
+of better performance in terms of effectiveness and efficacy, secondly linear regression that predicts
+a real valued output by analysing the relation between independent and dependent variables,
+and finally logistic regression which, contrary to linear regression, estimates a categorical
+value representing the expected class of given data object.
+
+In this report, I aim to narrate what I have learnt while doing tasks of the assignment.
+
+\section{Assignments}
+In this
+assignment,five assignments were given to us.Each of them has its on purpose, particular
+methods and functions.This assignment includes the phenomena curse of dimensionality and
+relationship with the sample and dimension sizes, sampling and dimensionality reduction and
+also visualization of data.All the assignments were done by using the scikit-learn library and were written in python.
+
+
+\subsection*{2.1 Curse of dimensionality } % the star suppresses numbering of sections and subsections
+In this assignment, we were asked to fill the table with parameters dimesion size and tuples size and to observe the difference of error rate and time.Firstly,a dataset with n-dimensions and m tuples must be generated.I used "numpy" library for making the dataset.Numpy is a package that is used for array-processing to create multidimensional array object and other mathy things.This task is for manipulating data so also "pandas" library is needed.These both are essential for all tasks so I imported them at the beginning every code.
+
+Numpy has a random.RandomState.randn method. X and y are assigned with data by using it.This method take parameters i make, nsamples and nfeatures,because they will change according to table.I need a data to train the model and after that I must check the model with some test data.So the random data I get before is parting with 70 percent for training and 30 for test data with train test split from scikit learn.
+
+As we know from previous math classes,linear regression is a modelling relationship with an number and "one" variable for example y=ax+b.In English Stochastic word has a meaning such as random probability and gradient means slope of a function.When dealing with big data,processing all data is hard work and costly.SGD takes random samples from data and deal with it each iteration and find the minima shorter than traing time. Math behind that operation,simply put,is to take gradient of cost  function every time with different samplings.It is best to implement lots of iterations. 
+
+I run SGDRegressor with 1000 iteration and after that fit both x,y train data to it.This is where the all math things done.With predict method and x test data, I did a prediction.To find error rates,I used mean squared error fınction because i did not want to get negative numbers.
+
+At the beginning of the code and after the code I used start time and stop time methods to calculate the passing time for each operation.
+
+
+\subsection*{2.2 Sampling and dimensionality reduction} % the star suppresses numbering of sections and subsections
+This task required to work with article c of the first table which has 10,000 tuple size and 2000 dimension size.But the dimension size will be changed with sampling  algorithm  to 500,100,10,4 and 1.It choose 500 random sample from 2000 with random.sample from scikitlearn library inside of a for loop.
+
+After sampling, I applied Principal Component Analysis(PCA) to dataset.But before PCA, I have to scale the data with importing preprocessing and take the transpose because scale function expects rows not columns.Scikitlearn uses pca object to train and later test another dataset instead of a function.Then fit the data to do calculations.
+
+Finally,I did split the data and apply SGD as I did it in 2.1 assignment. 
+
+At the beginning of the code and after the code I used start time and stop time methods to calculate the passing time for each operation.
+
+
+\subsection*{3.1 Visualization and binary-class classification} % the star suppresses numbering of sections and subsections
+In this task, I choose make moon dataset.After importing it,i split train and test data as I did previous tasks.This task asked us to apply SGD  but this time with logical regression.To do that, I used one of the parameters of SGD classifier: loss , and then assign it to "log" for logical regression.
+
+This task's main job is to visualize data.Matplotlib library one of the must common one to use. Seaborn is one of them too.I choose matplotlib because it feels much familiar.Pandas has dataframe.I put the train data in a dataframe to label rows and columns for easy classification.Then by using groupby,it split rows and columns to 0 and 1 and with key to index them.It was done in for loop so that procedure can apply the both of them.
+
+Finally,from matplotlib I did save the figure with savefig method, show and close the figure.
+
+\subsection*{3.2 Noising and multi-class classification} % the star suppresses numbering of sections and subsections
+In this task, I import load digits and split them as I did previous tasks.I apply grey method the plt from matplot.After that, I import random noise, choose salt and pepper as mode and 0.25 as amount,apply it both x train y train data.But it didn't work out.Code is deficit and useless.
+
+
+\section{Results}
+
+The result of 2.1 and 2.2 are in Table 1 and Table 2. The figure of 3.1 is saved in BinaryClassVisualization.pdf.
+
+
+\section{Conclusion}
+As you can see at the Table1 if the size of dimension is increases, the error increases as well.This
+does not happen at small data such as three dimension. We call it the curse of dimensionality.Because with dimension size increasing the volume of space is increases too ,so fast that, the data became spare.
+
+When the tuples size increasing , error is decreases because machine now
+has more data to train itself and learn from therefore it give more accurate results.But what we gain in error, cost us time.
+
+Traning time is increasing whether the dimension or tuples size increases.It did not matter which one because both of them make the data bigger so it takes time to conclude.
+
+If we look at the second table,in the first part we work with data of c of the first table.Tuple size is same while dimesion size is increases to 500,100,10,4 and finally to 1.We can see the both training time and error are
+decreases. Less dimension means cost less in both time and error.It can be explained by curse of dimensionality.
+
+At the final part of table,as  the dimension size is same,the sample size is decreasing.Train time is decreases too. This can explain simply as less sample size means less work and less work take less time.But the error rate is increasing.Because now we have less sample the train and learn, less experience,that is why error rate is higher.Like in real life, if you have less experience in something, then there is highly of chance of you to make mistakes.
+
+
+
+\nocite{*}
+\bibliographystyle{plain}
+
+\end{document}
+
